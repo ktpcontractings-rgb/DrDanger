@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input.jsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
 import { Textarea } from '@/components/ui/textarea.jsx'
+import StepByStepGuide from './components/StepByStepGuide'
 import { 
   Bot, 
   User, 
@@ -21,7 +22,8 @@ import {
   Settings,
   Sparkles,
   MessageSquare,
-  Zap
+  Zap,
+  Target
 } from 'lucide-react'
 import './App.css'
 
@@ -43,6 +45,7 @@ function App() {
 
   const tools = [
     { id: 'chat', name: 'Chat', icon: MessageSquare, description: 'Advanced conversation and assistance' },
+    { id: 'step-guide', name: 'Step-by-Step Guide', icon: Target, description: 'Interactive business setup and automation' },
     { id: 'image', name: 'Image Generation', icon: Image, description: 'Create stunning images with DALL-E' },
     { id: 'code', name: 'Code Writing', icon: Code, description: 'Write, debug, and execute code' },
     { id: 'document', name: 'Document Creation', icon: FileText, description: 'Create documents, reports, and presentations' },
@@ -93,6 +96,7 @@ function App() {
 
   const generateBotResponse = (message, tool) => {
     const responses = {
+      'step-guide': `🎯 Dr. Danger's Step-by-Step Business Guide activated! I'll walk you through: "${message}". This interactive system provides automated execution, real-time validation, and comprehensive guidance for complex business tasks. From domain setup to affiliate marketing, I'll handle the technical complexity while you focus on growing your business. Ready to automate your success?`,
       image: `🎨 Dr. Danger here! I\'ll create a spectacular image for you: "${message}". Using advanced DALL-E technology, I\'ll generate a high-quality, detailed image that perfectly captures your vision. In the full implementation, this connects to OpenAI\'s image generation API for stunning results.`,
       code: `💻 Dr. Danger\`s Code Lab activated! For your request: "${message}", here\`s what I\`ll provide:\n\n\`\`\`javascript\n// Advanced code solution by Dr. Danger\nfunction dangerouslyGoodCode() {\n  console.log("Dr. Danger delivers exceptional code!");\n  return "Production-ready implementation here";\n}\n\`\`\`\n\nIn the full version, I connect to advanced code generation APIs and provide executable, tested code with documentation.`,
       document: `📄 Dr. Danger\'s Document Studio engaged! I\'ll craft a professional document for: "${message}". This includes structured content, advanced formatting, charts, and all necessary sections. The full implementation generates documents in multiple formats (PDF, DOCX, HTML) with professional styling.`,
@@ -169,22 +173,25 @@ function App() {
             </Card>
           </div>
 
-          {/* Chat Interface */}
+          {/* Chat Interface or Step-by-Step Guide */}
           <div className="lg:col-span-3">
-            <Card className="h-[calc(100vh-200px)]">
-              <CardHeader className="border-b">
-                <div className="flex items-center justify-between">
-                  <CardTitle>Chat Interface</CardTitle>
-                  {selectedTool && (
-                    <Badge variant="secondary" className="flex items-center space-x-1">
-                      {tools.find(t => t.id === selectedTool)?.icon && 
-                        React.createElement(tools.find(t => t.id === selectedTool).icon, { className: "w-3 h-3" })
-                      }
-                      <span>{tools.find(t => t.id === selectedTool)?.name}</span>
-                    </Badge>
-                  )}
-                </div>
-              </CardHeader>
+            {selectedTool === 'step-guide' ? (
+              <StepByStepGuide />
+            ) : (
+              <Card className="h-[calc(100vh-200px)]">
+                <CardHeader className="border-b">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Chat Interface</CardTitle>
+                    {selectedTool && (
+                      <Badge variant="secondary" className="flex items-center space-x-1">
+                        {tools.find(t => t.id === selectedTool)?.icon && 
+                          React.createElement(tools.find(t => t.id === selectedTool).icon, { className: "w-3 h-3" })
+                        }
+                        <span>{tools.find(t => t.id === selectedTool)?.name}</span>
+                      </Badge>
+                    )}
+                  </div>
+                </CardHeader>
               
               {/* Messages */}
               <CardContent className="flex-1 overflow-y-auto p-4 space-y-4" style={{ height: 'calc(100% - 140px)' }}>
@@ -264,7 +271,7 @@ function App() {
                   </div>
                 )}
               </div>
-            </Card>
+            )}
           </div>
         </div>
       </div>
