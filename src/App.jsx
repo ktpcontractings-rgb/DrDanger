@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.j
 import { Badge } from '@/components/ui/badge.jsx'
 import { Textarea } from '@/components/ui/textarea.jsx'
 import StepByStepGuide from './components/StepByStepGuide'
+import ScreenShare from './components/ScreenShare'
 import { 
   Bot, 
   User, 
@@ -45,6 +46,7 @@ function App() {
 
   const tools = [
     { id: 'chat', name: 'Chat', icon: MessageSquare, description: 'Advanced conversation and assistance' },
+    { id: 'screen-share', name: 'Screen Share', icon: Settings, description: 'Share your screen for visual assistance' },
     { id: 'step-guide', name: 'Step-by-Step Guide', icon: Target, description: 'Interactive business setup and automation' },
     { id: 'image', name: 'Image Generation', icon: Image, description: 'Create stunning images with DALL-E' },
     { id: 'code', name: 'Code Writing', icon: Code, description: 'Write, debug, and execute code' },
@@ -96,6 +98,7 @@ function App() {
 
   const generateBotResponse = (message, tool) => {
     const responses = {
+      'screen-share': `👁️ Dr. Danger's Vision System activated! I can now see your screen and provide real-time visual assistance for: "${message}". I'll analyze what you're looking at and provide contextual guidance, step-by-step instructions, and help you navigate through any interface. This is perfect for getting help with websites, applications, forms, or any visual task!`,
       'step-guide': `🎯 Dr. Danger's Step-by-Step Business Guide activated! I'll walk you through: "${message}". This interactive system provides automated execution, real-time validation, and comprehensive guidance for complex business tasks. From domain setup to affiliate marketing, I'll handle the technical complexity while you focus on growing your business. Ready to automate your success?`,
       image: `🎨 Dr. Danger here! I\'ll create a spectacular image for you: "${message}". Using advanced DALL-E technology, I\'ll generate a high-quality, detailed image that perfectly captures your vision. In the full implementation, this connects to OpenAI\'s image generation API for stunning results.`,
       code: `💻 Dr. Danger\`s Code Lab activated! For your request: "${message}", here\`s what I\`ll provide:\n\n\`\`\`javascript\n// Advanced code solution by Dr. Danger\nfunction dangerouslyGoodCode() {\n  console.log("Dr. Danger delivers exceptional code!");\n  return "Production-ready implementation here";\n}\n\`\`\`\n\nIn the full version, I connect to advanced code generation APIs and provide executable, tested code with documentation.`,
@@ -173,10 +176,12 @@ function App() {
             </Card>
           </div>
 
-          {/* Chat Interface or Step-by-Step Guide */}
+          {/* Chat Interface, Step-by-Step Guide, or Screen Share */}
           <div className="lg:col-span-3">
             {selectedTool === 'step-guide' ? (
               <StepByStepGuide />
+            ) : selectedTool === 'screen-share' ? (
+              <ScreenShare />
             ) : (
               <Card className="h-[calc(100vh-200px)]">
                 <CardHeader className="border-b">
