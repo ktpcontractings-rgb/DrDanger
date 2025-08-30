@@ -270,7 +270,7 @@ function App() {
                     Using: {tools.find(t => t.id === selectedTool)?.name} - {tools.find(t => t.id === selectedTool)?.description}
                   </div>
                 )}
-              </div>
+              </Card>
             )}
           </div>
         </div>
