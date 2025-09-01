@@ -28,7 +28,7 @@ import {
 } from 'lucide-react'
 import './App.css'
 
-const API_BASE_URL = 'https://nghki1czd0o1.manus.space/api'
+const API_BASE_URL = 'https://drdanger-production.up.railway.app/api'
 
 function App() {
   const [messages, setMessages] = useState([
