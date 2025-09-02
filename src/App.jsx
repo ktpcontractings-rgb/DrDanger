@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import * as React from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Input } from '@/components/ui/input.jsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.jsx'
@@ -7,6 +6,7 @@ import { Badge } from '@/components/ui/badge.jsx'
 import { Textarea } from '@/components/ui/textarea.jsx'
 import StepByStepGuide from './components/StepByStepGuide'
 import ScreenShare from './components/ScreenShare'
+import VoiceChat from './components/VoiceChat'
 import { 
   Bot, 
   User, 
@@ -24,7 +24,9 @@ import {
   Sparkles,
   MessageSquare,
   Zap,
-  Target
+  Target,
+  Mic,
+  Headphones
 } from 'lucide-react'
 import './App.css'
 
@@ -46,6 +48,7 @@ function App() {
 
   const tools = [
     { id: 'chat', name: 'Chat', icon: MessageSquare, description: 'Advanced conversation and assistance' },
+    { id: 'voice-chat', name: 'Voice Chat', icon: Headphones, description: 'Talk to Dr. Danger with voice' },
     { id: 'screen-share', name: 'Screen Share', icon: Settings, description: 'Share your screen for visual assistance' },
     { id: 'step-guide', name: 'Step-by-Step Guide', icon: Target, description: 'Interactive business setup and automation' },
     { id: 'image', name: 'Image Generation', icon: Image, description: 'Create stunning images with DALL-E' },
@@ -176,12 +179,14 @@ function App() {
             </Card>
           </div>
 
-          {/* Chat Interface, Step-by-Step Guide, or Screen Share */}
+          {/* Chat Interface, Voice Chat, Step-by-Step Guide, or Screen Share */}
           <div className="lg:col-span-3">
             {selectedTool === 'step-guide' ? (
               <StepByStepGuide />
             ) : selectedTool === 'screen-share' ? (
               <ScreenShare />
+            ) : selectedTool === 'voice-chat' ? (
+              <VoiceChat />
             ) : (
               <Card className="h-[calc(100vh-200px)]">
                 <CardHeader className="border-b">
