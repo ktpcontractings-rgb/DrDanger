@@ -7,6 +7,8 @@ import { Textarea } from '@/components/ui/textarea.jsx'
 import StepByStepGuide from './components/StepByStepGuide'
 import ScreenShare from './components/ScreenShare'
 import VoiceChat from './components/VoiceChat'
+import GlobalVoiceToggle from './components/GlobalVoiceToggle'
+import { VoiceProvider, GlobalVoiceControls, useVoice, useVoiceInput, useVoiceOutput } from './components/GlobalVoiceSystem'
 import { 
   Bot, 
   User, 
@@ -128,6 +130,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Global Voice Toggle */}
+      <GlobalVoiceToggle onVoiceStateChange={(state) => {
+        console.log('Voice state changed:', state);
+        // Handle voice state changes globally
+      }} />
+      
       {/* Header */}
       <header className="border-b bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
