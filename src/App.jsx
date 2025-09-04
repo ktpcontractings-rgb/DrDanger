@@ -8,6 +8,7 @@ import StepByStepGuide from './components/StepByStepGuide'
 import ScreenShare from './components/ScreenShare'
 import VoiceChat from './components/VoiceChat'
 import GlobalVoiceToggle from './components/GlobalVoiceToggle'
+import VoiceAuthentication from './components/VoiceAuthentication'
 import { VoiceProvider, GlobalVoiceControls, useVoice, useVoiceInput, useVoiceOutput } from './components/GlobalVoiceSystem'
 import { 
   Bot, 
@@ -134,6 +135,15 @@ function App() {
       <GlobalVoiceToggle onVoiceStateChange={(state) => {
         console.log('Voice state changed:', state);
         // Handle voice state changes globally
+      }} />
+      
+      {/* Voice Authentication System */}
+      <VoiceAuthentication onAuthStateChange={(state) => {
+        console.log('Auth state changed:', state);
+        // Handle authentication state changes
+        if (state.type === 'voice_authenticated') {
+          console.log('Developer mode activated via voice authentication');
+        }
       }} />
       
       {/* Header */}
